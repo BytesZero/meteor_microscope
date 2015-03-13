@@ -12,6 +12,11 @@ Router.route('/posts/:_id', {
     name: 'postItem',
     data: function() { return Posts.findOne(this.params._id); }
 });
+Router.route('/posts/:_id/edit', {
+    name: 'postEdit',
+    data: function() { return Posts.findOne(this.params._id); }
+});
+
 Router.route('/submit', {name: 'postSubmit'});
 
 var requireLogin = function() {

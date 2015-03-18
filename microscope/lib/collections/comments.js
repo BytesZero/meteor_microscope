@@ -22,6 +22,9 @@ Meteor.methods({
             submitted: new Date()
         });
 
+        // 更新帖子的评论数
+        Posts.update(comment.postId, {$inc: {commentsCount: 1}});
+
         return Comments.insert(comment);
     }
 });

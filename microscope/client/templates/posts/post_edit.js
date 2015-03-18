@@ -17,7 +17,7 @@ Template.postEdit.events({
                 // 向用户显示错误信息
                 throwError(error.reason);
             } else {
-                Router.go('postItem', {_id: currentPostId});
+                Router.go('postPage', {_id: currentPostId});
             }
         });
     },

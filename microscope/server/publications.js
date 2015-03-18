@@ -7,3 +7,7 @@ Meteor.publish('posts', function() {
 Meteor.publish('comments', function() {
     return Comments.find();
 });
+//发布 notifications
+Meteor.publish('notifications', function() {
+    return Notifications.find();
+});

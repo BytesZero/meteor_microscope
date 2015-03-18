@@ -5,7 +5,7 @@ Router.configure({
     layoutTemplate: 'layout',
     loadingTemplate: 'loading',
     notFoundTemplate: 'notFound',
-    waitOn: function() { return [Meteor.subscribe('posts'), Meteor.subscribe('comments')]; }
+    waitOn: function() { return [Meteor.subscribe('posts'), Meteor.subscribe('notifications')] }
 });
 Router.route('/', {name: 'postsList'});
 Router.route('/posts/:_id', {

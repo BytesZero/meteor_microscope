@@ -5,9 +5,32 @@ Router.configure({
     layoutTemplate: 'layout',
     loadingTemplate: 'loading',
     notFoundTemplate: 'notFound',
-    waitOn: function() { return [Meteor.subscribe('posts'), Meteor.subscribe('notifications')] }
+    waitOn: function() {
+        return [Meteor.subscribe('notifications')]
+    }
 });
-Router.route('/', {name: 'postsList'});
+//重构 postsLists 路由为 RouteController.
+PostsListController = RouteController.extend({
+    template: 'postsList',
+    increment: 5,
+    postsLimit: function() {
+        return parseInt(this.params.postsLimit) || this.increment;
+    },
+    findOptions: function() {
+        return this.postsLimit();
+    },
+    waitOn: function() {
+        return Meteor.subscribe('posts',{submitted: -1}, this.findOptions());
+    },
+    data: function() {
+        return {posts: Posts.find({},{submitted: -1}, this.findOptions())};
+    }
+});
+//重构 postsLists 路由为 RouteController.
+Router.route('/:postsLimit?', {
+    name: 'postsList'
+});
+
 Router.route('/posts/:_id', {
     name: 'postPage',
     waitOn: function() {
